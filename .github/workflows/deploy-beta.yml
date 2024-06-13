@@ -27,13 +27,15 @@ jobs:
         password: ${{ secrets.HEROKU_API_KEY }}
 
     - name: Build and push Docker image
+      env:
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
       run: |
-        docker build -t registry.heroku.com/${{ secrets.HEROKU_BETA_APP_NAME }}/worker -f Dockerfile .
+        docker build -t registry.heroku.com/${{ secrets.HEROKU_BETA_APP_NAME }}/worker --build-arg DISCORD_TOKEN=${{ secrets.DISCORD_TOKEN }} -f Dockerfile .
         docker push registry.heroku.com/${{ secrets.HEROKU_BETA_APP_NAME }}/worker
 
 
     - name: Heroku Deploy
-      uses: akhileshns/heroku-deploy@v3.12.12  # La versión más reciente al momento de escribir
+      uses: akhileshns/heroku-deploy@v3.12.12
       with:
         heroku_api_key: ${{ secrets.HEROKU_BETA_API_KEY }}
         heroku_app_name: ${{ secrets.HEROKU_BETA_APP_NAME }}

@@ -3,6 +3,10 @@ FROM python:3.10.11-slim-bullseye
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
+ARG DISCORD_TOKEN
+
+ENV DISCORD_TOKEN=$DISCORD_TOKEN
+
 RUN apt-get update && apt-get install -y \
     gcc \
     libffi-dev \
