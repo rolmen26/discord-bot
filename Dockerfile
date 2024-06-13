@@ -1,17 +1,17 @@
-FROM python:3.10.11-alpine3.18
+FROM python:3.10.11-slim-bullseye
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-RUN apk update && apk add --no-cache \
+RUN apt-get update && apt-get install -y \
     gcc \
-    musl-dev \
     libffi-dev \
-    openssl-dev \
+    libssl-dev \
     ffmpeg \
-    libmagic \
+    libopus-dev \
     supervisor \
-    opus-dev
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r /app/requirements.txt
