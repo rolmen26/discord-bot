@@ -1,0 +1,10 @@
+# Git ignore for a pyhton project
+#
+
+# Byte-compiled / optimized / DLL files
+
+***__pycache__/
+logs/
+***.log
+
+.env
