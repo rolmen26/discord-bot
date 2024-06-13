@@ -40,3 +40,9 @@ jobs:
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_BETA_API_KEY }}
 
+    - name: Scale worker dyno
+      run: |
+        heroku ps:scale worker=1 --app ${{ secrets.HEROKU_BETA_APP_NAME }}
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_BETA_API_KEY }}
+
